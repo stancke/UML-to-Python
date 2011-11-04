@@ -1,0 +1,66 @@
+[comment]
+  Copyright 2008, 2010 Obeo
+  All rights reserved.  This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License 1.0
+  
+  Any license can be applied to the files generated with this template.
+  
+  author <a href="mailto:stephane.bouchet@obeo.fr">Stephane Bouchet</a>
+[/comment]
+[module classBody('http://www.eclipse.org/uml2/3.0.0/UML')/]
+[import common/]
+[template public generateClassBody(c : Class)]
+[if (c.name.contains('View'))]
+from django.shortcuts import render_to_response
+[else]
+from django.db import models
+
+class [c.name.toUpperFirst()/](models.Model):
+[/if]
+
+[for (p : Property | c.getAllAttributes())]
+    [ p.name/] = models.[ p.type.name/]Field()
+[/for]
+[for (p : Property | c.getAssociations().memberEnd)]
+[if (p.upper = -1 or p.upper > 1)]
+    /**
+     * the [p.name/] attribute.
+     */
+    private List<[p.type.name/]> [p.name/];
+[else]
+    /**
+     * the [p.name/] attribute.
+     */
+    private [p.type.name/] [p.name/];
+[/if]
+[/for]
+[for (o : Operation | c.getOperations())]
+[o.operationBody(c)/]
+[/for]
+[for (interf : Interface | c.getImplementedInterfaces())]
+[for (o : Operation | interf.ownedOperation)]
+[o.operationBody(c)/]
+[/for]
+[/for]
+[/template]
+[template private operationBody(o : Operation, c : Class)]
+[for (p : Parameter | o.ownedParameter) ? (p.direction <> ParameterDirectionKind::return)]
+[paramOperationComment(p)/]
+[/for]
+[if (not o.type.oclIsUndefined())]
+[returnOperationComment()/]
+[/if]
+[if (c.name.contains('View'))]
+
+def [o.name.toLower()/] (request,[o.getInParameter()/]):
+    pass
+[/if]
+[if (c.name.contains('Template'))]
+<html>
+</html>
+[/if]
+[if  not (c.name.contains('View')) and not (c.name.contains('Template'))]
+    def [o.name.toLower()/] (self,[o.getInParameter()/]):
+        pass
+[/if]
+[/template]
