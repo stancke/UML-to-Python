@@ -66,6 +66,66 @@
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
       </parameter>
     </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateActivity" visibility="Public" main="true">
+      <body xsi:type="mtl:FileBlock" openMode="OverWrite">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:IfBlock">
+            <body xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/24/Bag(String)">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="/24/Set(ActivityEdge)">
+                <source xsi:type="ocl.ecore:VariableExp" name="a" referredVariable="/0/generateActivity/@body.0/@body.0/a">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode/incoming"/>
+              </source>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/generateActivity/@body.0/@body.0/@body.0/collect/temp1">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityEdge"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp1">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityEdge"/>
+              </iterator>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+            <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="a" referredVariable="/0/generateActivity/@body.0/@body.0/a">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+              </source>
+              <argument xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="a" referredVariable="/0/generateActivity/@body.0/@body.0/a">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+            </ifExpr>
+          </body>
+          <loopVariable name="a">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/24/Set(ActivityNode)">
+            <source xsi:type="ocl.ecore:VariableExp" name="a" referredVariable="/0/generateActivity/a">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity/node"/>
+          </iterSet>
+        </body>
+        <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="atividades">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </fileUrl>
+      </body>
+      <parameter name="a">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+      </parameter>
+    </ownedModuleElement>
   </mtl:Module>
   <ecore:EPackage name="additions">
     <eClassifiers xsi:type="ecore:EClass" name="String_Class">
@@ -109,6 +169,16 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="i">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateActivity">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateActivity"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="a">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
         </eParameters>
       </eOperations>
       <eOperations name="getFullPathFile">
@@ -205,6 +275,11 @@
         <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Activity_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
@@ -271,6 +346,50 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="collections">
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(ActivityNode)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(ActivityEdge)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityEdge"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(String)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//ActivityNode"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Activity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -385,6 +504,111 @@
       <details key="start" value="662"/>
       <details key="end" value="675"/>
       <details key="line" value="21"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateActivity">
+      <details key="start" value="825"/>
+      <details key="end" value="1029"/>
+      <details key="line" value="29"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateActivity/@body.0">
+      <details key="start" value="892"/>
+      <details key="end" value="1017"/>
+      <details key="line" value="31"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateActivity/@body.0/@body.0">
+      <details key="start" value="921"/>
+      <details key="end" value="1009"/>
+      <details key="line" value="32"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateActivity/@body.0/@body.0/@body.0">
+      <details key="start" value="955"/>
+      <details key="end" value="1002"/>
+      <details key="line" value="33"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateActivity/@body.0/@body.0/@body.0/collect">
+      <details key="start" value="979"/>
+      <details key="end" value="994"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateActivity/@body.0/@body.0/@body.0/collect/@source">
+      <details key="start" value="979"/>
+      <details key="end" value="989"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateActivity/@body.0/@body.0/@body.0/collect/@source/a">
+      <details key="start" value="979"/>
+      <details key="end" value="980"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateActivity/@body.0/@body.0/@body.0/collect/@body">
+      <details key="start" value="990"/>
+      <details key="end" value="994"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateActivity/@body.0/@body.0/@body.0/collect/@body/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateActivity/@body.0/@body.0/@body.0/collect/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateActivity/@body.0/@body.0/@body.0/@body.1">
+      <details key="start" value="996"/>
+      <details key="end" value="997"/>
+      <details key="line" value="35"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateActivity/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="959"/>
+      <details key="end" value="974"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/generateActivity/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="959"/>
+      <details key="end" value="965"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.35" references="/0/generateActivity/@body.0/@body.0/@body.0/@ifExpr/@source/a">
+      <details key="start" value="959"/>
+      <details key="end" value="960"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.36" references="/0/generateActivity/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="968"/>
+      <details key="end" value="974"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.37" references="/0/generateActivity/@body.0/@body.0/@body.0/@ifExpr/@argument.0/a">
+      <details key="start" value="968"/>
+      <details key="end" value="969"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.38" references="/0/generateActivity/@body.0/@body.0/a">
+      <details key="start" value="927"/>
+      <details key="end" value="943"/>
+      <details key="line" value="32"/>
+    </eAnnotations>
+    <eAnnotations source="positions.39" references="/0/generateActivity/@body.0/@body.0/@iterSet">
+      <details key="start" value="946"/>
+      <details key="end" value="952"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.40" references="/0/generateActivity/@body.0/@body.0/@iterSet/a">
+      <details key="start" value="946"/>
+      <details key="end" value="947"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.41" references="/0/generateActivity/@body.0/@fileUrl">
+      <details key="start" value="899"/>
+      <details key="end" value="911"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.42" references="/0/generateActivity/a">
+      <details key="start" value="859"/>
+      <details key="end" value="871"/>
+      <details key="line" value="29"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>
